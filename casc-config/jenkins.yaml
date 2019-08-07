@@ -1,0 +1,78 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  labelString: master
+
+  securityRealm:
+    github:
+      githubWebUri: "https://github.com"
+      githubApiUri: "https://api.github.com"
+      clientID: "${GITHUB_AUTH_CLIENT_ID}"
+      clientSecret: "${GITHUB_AUTH_SECRET}"
+      oauthScopes: "read:org,user:email"
+
+  # Authorization based upon GitHub usernames
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+      - "Agent/Build:GregSharpe1"
+      - "Agent/Configure:GregSharpe1"
+      - "Agent/Connect:GregSharpe1"
+      - "Agent/Create:GregSharpe1"
+      - "Agent/Delete:GregSharpe1"
+      - "Agent/Disconnect:GregSharpe1"
+      - "Credentials/Create:GregSharpe1"
+      - "Credentials/Delete:GregSharpe1"
+      - "Credentials/ManageDomains:GregSharpe1"
+      - "Credentials/Update:GregSharpe1"
+      - "Credentials/View:GregSharpe1"
+      - "Job/Build:GregSharpe1"
+      - "Job/Cancel:GregSharpe1"
+      - "Job/Configure:GregSharpe1"
+      - "Job/Create:GregSharpe1"
+      - "Job/Delete:GregSharpe1"
+      - "Job/Discover:GregSharpe1"
+      - "Job/Move:GregSharpe1"
+      - "Job/Read:GregSharpe1"
+      - "Job/Workspace:GregSharpe1"
+      - "Lockable Resources/Reserve:GregSharpe1"
+      - "Lockable Resources/Unlock:GregSharpe1"
+      - "Overall/Administer:GregSharpe1"
+      - "Overall/Read:GregSharpe1"
+      - "Run/Delete:GregSharpe1"
+      - "Run/Replay:GregSharpe1"
+      - "Run/Update:GregSharpe1"
+      - "SCM/Tag:GregSharpe1"
+      - "View/Configure:GregSharpe1"
+      - "View/Create:GregSharpe1"
+      - "View/Delete:GregSharpe1"
+      - "View/Read:GregSharpe1"
+
+  crumbIssuer: standard
+
+unclassified:
+  location:
+    url: "https://jenkins.arnold.netw0rk.sh/"
+    adminAddress: "jenkins+me@gregsharpe.co.uk"
+
+  simple-theme-plugin:
+    elements:
+      - cssUrl:
+          url: "https://s3-eu-west-1.amazonaws.com/assets.cloud.netw0rk.sh/neo-light.css"
+
+jobs:
+  - file: "/var/jenkins_home/casc-config/jobs/jobdsl.groovy"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "github-token"
+              username: git
+              password: "${GITHUB_TOKEN}"
+              description: "GitHub token used to interact with GitHub not as Authorization."
+          - string:
+              id: "slack-token"
+              scope: GLOBAL
+              secret: "${SLACK_TOKEN}"
