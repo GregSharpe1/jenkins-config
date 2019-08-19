@@ -1,0 +1,63 @@
+title: ${WIKI_TITLE}
+host: ${WIKI_HOST}
+
+port: 80
+
+paths:
+  repo: ./repo
+  data: ./data
+
+uploads:
+  maxImageFileSize: 3
+  maxOtherFileSize: 100
+
+lang: en
+langRtl: false
+public: false
+auth:
+  defaultReadAccess: false
+  local:
+    enabled: true
+  github:
+    enabled: true 
+    clientId: ${GITHUB_CLIENT_ID} 
+    clientSecret: ${GITHUB_CLIENT_SECRET} 
+sessionSecret: ${SESSION_SECRET}
+
+db: 'mongodb://localhost:27017/wiki'
+
+git:
+  url: ${GIT_REPO_URL}
+  branch: ${GIT_REPO_BRANCH} 
+  auth:
+    type: basic
+
+    # SSH Type auth didn't seem to work
+    username: ${GITHUB_AUTH_USERNAME}
+    # Because my account has 2FA, I had to create an personal access token.
+    password: ${GITHUB_AUTH_PASSWORD}
+
+    sslVerify: true
+
+  serverEmail: ${GIT_COMMIT_EMAIL}
+  showUSerEmail: true
+
+features:
+  linebreaks: true
+  mathjax: true
+
+externalLogging:
+  bugsnag: false
+  loggly: false
+  papertrail: false
+  rollbar: false
+  sentry: false
+
+theme:
+  primary: indigo
+  alt: blue-grey
+  viewSource: all
+  footer: blue-grey
+  code:
+    dark: true
+    colorize: true
