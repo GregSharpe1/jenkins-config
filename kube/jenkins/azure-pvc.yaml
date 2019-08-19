@@ -1,0 +1,12 @@
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: jenkins-home-claim
+#   namespace: jenkins-ci
+# spec:
+#   accessModes:
+#   - ReadWriteOnce
+#   storageClassName: managed-premium
+#   resources:
+#     requests:
+#       storage: 5Gi
